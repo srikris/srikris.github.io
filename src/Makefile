@@ -1,7 +1,7 @@
 all:
 		./build.sh 
-#		./build.sh blog
 		./build.sh papers 
+#		./build.sh blog
 
 .PHONY: clean
 clean:
