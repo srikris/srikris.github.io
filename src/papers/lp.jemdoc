@@ -1,0 +1,37 @@
+# jemdoc: menu{MENU}{menu.html}{../../}
+=== An Approximate, Efficient Solver for LP Rounding
+
+[http://cs.wisc.edu./~srikris/ Srikrishna Sridhar],
+[http://cs.wisc.edu./~bittorf/ Victor Bittorf],
+[http://cs.wisc.edu./~ji-liu/ Ji Liu],
+[http://cs.wisc.edu./~czhang/ Ce Zhang],
+[http://cs.stanford.edu/people/chrismre/ Christopher Ré] and
+[http://cs.wisc.edu./~swright/ Stephen J. Wright]
+
+== Preprints 
+- [lp/camera-ready-full.pdf NIPS 2013 Preprint] 
+- [http://arxiv.org/pdf/1311.2661v1.pdf Arxiv]
+
+== Presentations 
+- [lp/NIPS-13.pdf EMC University Day 2013 Poster] 
+- [lp/Pivotal-Aug13.pdf Pivotal Inc. 2013 Talk] 
+- [lp/NIPS-13.pdf NIPS 2013 Poster] 
+
+== Abstract
+Many problems in machine learning can be solved by rounding the solution of an
+appropriate linear program (LP). This paper shows that we can recover solutions
+of comparable quality by rounding an approximate LP solution instead of the ex-
+act one. These approximate LP solutions can be computed efficiently by applying
+a parallel stochastic-coordinate-descent method to a quadratic-penalty
+formulation of the LP. We derive worst-case runtime and solution quality
+guarantees of this scheme using novel perturbation and convergence analysis.
+Our experiments demonstrate that on such combinatorial problems as vertex
+cover, independent set and multiway-cut, our approximate rounding scheme is up
+to an order of magnitude faster than Cplex (a commercial LP solver) while
+producing solutions of similar quality.
+
+== Code 
+Coming soon! 
+
+== Instances
+Coming soon! 

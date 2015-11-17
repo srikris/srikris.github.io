@@ -1,0 +1,412 @@
+# jemdoc: menu{MENU}{menu.html}{../../}
+==== An introduction to distributed machine learning 
+
+Building, managing, and even using distributed systems can be hard. For over 50
+years, distributed systems experts have been working hard to achieve the vision
+of *making many machines work harmoniously together as though they were one*.
+With an increase in the volume of data being collected today, the need to
+efficiently distribute computation has greatly increased. Today, distributed
+computation is ubiquitous. For some problems, there are many existing
+implementations of distributed systems that can scale out computation
+efficiently, but there are many other problems where significant roadblocks
+prevent efficient distribution. In this blog post, I will provide perspective
+on the challenges and benefits of using distributed systems for modern day
+machine learning needs.
+
+**Figure 1**: Don’t use a distributed system if you don’t need it just like you
+don’t assemble furniture with a chainsaw.
+
+If I were to summarize my experiences with distributed computation, it would
+be: “*Don’t use a cluster unless you know you need it.*” Like with using most
+tools, understanding the limitations and appropriate context in which to apply
+the tool is critical to success. Using a distributed system without a
+reasonable expectation of its benefits could be as hazardous as bringing a
+chainsaw to an [IKEA furniture](http://www.ikea.com/) assembling party. For
+those that are interested, I would recommend reading [Aphyr’s call-me-maybe
+series](https://aphyr.com/) of blog posts where he systematically picks apart
+distributed systems that set unreasonable expectations for their users.
+
+To explain what I mean by an *unreasonable expectation*, consider a situation
+where a data scientist tries to train a logistic regression model on a dataset
+with only around 100 data points on a compute-cluster with 20 machines. Here,
+the overhead of scheduling a job on the cluster far exceeds the cost of
+training a model on a single machine. As a result, there is a quantifiable
+additional cost of using the distributed system either in terms of time wasted
+on a persistent cluster (something someone else could have used) or the compute
+cost of using additional machines in an elastic cluster.
+
+Now that you have been adequately warned, I feel comfortable telling you about
+how **_awesome_ **distributed computation can be for scaling out sophisticated
+machine learning algorithms.[](#_msocom_4)[](#_msocom_5) Recently, we were able
+to push [pagerank](https://en.wikipedia.org/wiki/PageRank) through
+unprecedented throughput of _3B edges/sec_ on [the world’s largest publicly
+available graph](http://webdatacommons.org/hyperlinkgraph/index.html) (the
+_Common Crawl Graph)_ [](#_msocom_6)[](#_msocom_7)[](#_msocom_8)which has 128B
+edges and 3.5B nodes. This is about 50% faster than [specialized research code
+running on expensive custom
+hardware](http://blog.commoncrawl.org/2015/02/analyzing-a-web-graph-with-129-billion-edges-using-flashgraph/).
+From correspondences with the engineers at Common Crawl, we know that ours is
+the only general-purpose distributed computation engine to be able to complete
+this task. For more details on the API of how to use Dato Distributed for
+distributed model training, I refer an interested reader to some of [blog
+posts](http://blog.dato.com/dato-distributed-in-hadoop), our
+[user](https://dato.com/learn/userguide/)
+[guide](https://dato.com/learn/userguide/), and [Yucheng's
+talk](http://www.slideshare.net/dato-inc/making-machine-learning-scale-single-machine-and-distributed)
+on scalable machine learning (must watch!).
+
+=== What is the current state-of-the-art?
+
+Before I get into the details, I would like to clarify that the difficulty in
+distributing computation for data science and machine learning is highly
+dependent on the nature of the algorithms and computation models being
+considered. For some problems like [ETL
+pipelines](https://en.wikipedia.org/wiki/Extract,_transform,_load), [cross
+validation](https://en.wikipedia.org/wiki/Cross-validation_(statistics)),
+making batch predictions, and estimating mean-covariance distributed systems
+have very obvious benefits. These tasks are sometimes called _pleasantly
+parallel_ or _embarrassingly parallel_ because there is little or no effort
+required to separate the computation into multiple jobs which are independent
+from each other. They exhibit a property called _horizontal scaling_ (sometimes
+                                                                      known as
+                                                                      scaling-out)
+which means that performance always improves as we add more machines to a
+distributed system. For these tasks the mantra is simpler; _Are things fast
+enough? If yes, then you are done, otherwise add more machines._
+
+
+However, things get more interesting when scaling-out slightly more
+sophisticated machine learning models like logistic regression, support vector
+machines (or anything that can be cast as an
+          [M-estimator](https://en.wikipedia.org/wiki/M-estimator)) exhibit
+_excellent horizontal scaling_ for the most part, but may sometimes not
+depending on the nature of the input data and the speed of the physical
+networks connecting the cluster of machines.
+
+
+Finally, there are many problems such as
+[graph-analytics](https://dato.com/learn/userguide/graph_analytics/intro.html),
+[factorization
+machines](https://dato.com/solutions/machine-learning-algorithms/recommender.html)
+where there brightest of researchers are still making advancements in theory
+([communication
+ complexities](http://research.microsoft.com/pubs/188946/MSR-TR-2013-35.pdf))
+as well as
+[implementation](https://github.com/dato-code/Dato-Core/blob/master/src/unity/lib/gl_sgraph.hpp)
+to achieve the mission of distributed systems i.e _making many machines work
+harmoniously together as though a single machine._
+
+
+Distributing computation can vary in difficulty from easily achieved to active
+research area, making it hard to know where in this spectrum a particular
+problem lies. One way of knowing this is to ask the question - _Will things be
+faster if I add many more cores or many more disks to my single machine?._ If
+the answer to this question is yes, then you can benefit from distribution. If
+the answer is no, then it is probably unwise to even consider using a
+distributed systems. For those that care about complexity, there is an entire
+class of problems (known as
+                   [P-complete](https://en.wikipedia.org/wiki/P-complete))
+which are believed to be sequential for all practical purposes (some of them
+                                                                include [linear
+                                                                programming](https://en.wikipedia.org/wiki/Linear_programming)
+                                                                and [data
+                                                                compression](https://en.wikipedia.org/wiki/LZ4_(compression_algorithm))).
+
+=== Getting started with distributed systems
+
+When I am getting started with a new data science/machine learning problem that
+may require distribution, some of the key questions that I often ask myself
+are:
+
+
+* Why should I distribute?
+* How should I distribute?
+* How much do I benefit?
+
+Having answers to these questions often helps me understand, appreciate, and
+reason about distributed computation.
+
+== Why distribute?
+
+You should distribute if it allows you to do more in _one of many dimensions_:
+scale, speed, with reduced costs. As a data scientist, each of the three
+dimensions can mean a lot. Improving speed gives me faster answers to my
+questions which allows me to iterate more quickly to production ready model.
+Improving scale enables me to use all my data. And reducing costs ensures that
+I spend very little time negotiating with others about getting resources, and
+instead focus on building the next intelligent application that can change the
+world. If you work at Google, Microsoft, Facebook, Dropbox, or any of the tech
+giants that have access to virtually limitless clusters that are configured,
+       managed, and maintained by distributed systems experts, you can probably
+       skip over this section and jump straight to how we build our distributed
+       machine learning algorithms. For those that don’t, the first question I
+       always ask myself before considering distributing computation is: _Why
+       should I distribute my computation_? More often than not, the answer to
+       this question comes down to whether I can _accomplish tasks at a larger
+       scale, faster, or more economically_ in comparison with a single
+       machine.
+
+=  Scale
+
+When configured correctly, distributed systems can handle more data than a
+single machine can. More disks, more memory, more CPUs, and pretty much more of
+everything means that the volume of data is no longer an issue. However, it is
+important to remember that moving large amounts of data is not negligible in
+terms of time and cost. When data is already distributed, _pushing the
+computation to the data_ makes more sense.
+
+= Speed
+
+Distributed computation can be faster if the computation being distributed is
+inherently compute bound (i.e high CPU usage on all machines), or i/o bound
+(i.e high disk usage on all machines). In this setting, adding more CPUs and
+more disks naturally help the cause. But do keep in mind that for some problems
+the more machines you add, the more overhead you add (no free lunch) so
+striking the right balance is important. 
+
+= Cost
+
+In many cases, the use of one large beefy machine is possible in principle, but
+it may be more economical to obtain the same level of performance with a
+[cluster](https://en.wikipedia.org/wiki/Cluster_(computing)) of several low-end
+computers. Facebook, Microsoft, Google, Baidu, Yahoo, and several other tech
+giants have been very successful in building powerful [clusters from commodity
+machines.](https://en.wikipedia.org/wiki/Commodity_computing) In an ideal
+world, where you have a wonderful cluster with shared resources, you should be
+able to submit your job and get your results quickly. But in reality, machines
+fail, software fails, the network fails, and jobs fail. Anything that can go
+wrong will go wrong (given enough time) and that requires resources (e.g.
+                                                                     cluster
+                                                                     administrators,
+                                                                     dev-ops
+                                                                     etc.) to
+constantly maintain and look after the cluster. Operational costs for these
+clusters are not negligible so be sure to consider it.
+
+Figure 3: An architecture diagram of Dato Distributed._
+
+==  How we distribute?
+
+Assuming you have identified _why_ distributed computation is needed for your
+problem, we can get into the details of _how_ we build each of the components
+of our distributed machine learning system. I will start at the lowest level
+describing a high performance [remote procedure call
+(RPC)](https://en.wikipedia.org/wiki/Remote_procedure_call) mechanism designed
+to allow one machine to execute predefined code-snippets on another machine.
+Using this basic RPC mechanism, we can then define some commonly used
+distributed computing abstractions like
+[Allreduce](http://mpitutorial.com/tutorials/mpi-reduce-and-allreduce/).
+Finally, we use these computation abstractions to write high-level machine
+learning algorithms to effectively distribute computation efficiently in a
+cluster. In this post, we will use linear model training (logistic regression,
+                                                          linear regression,
+                                                          and linear svm) as an
+example of reasonably sophisticated distributed computing that can exhibit
+_horizontal scaling_ when implemented correctly.
+
+= The Remote Procedure Call
+
+The goal of RPC is to allow communication between multiple machines by allowing
+a function (subroutine or procedure) to execute on another machine that shares
+the same network, without the algorithm developer explicitly coding the details
+for how this remote interaction happens. The RPC layer that we use is exactly
+the same as the one we built in the [Distributed
+PowerGraph](https://github.com/dato-code/PowerGraph) framework from the [Select
+Lab at Carnegie Mellon
+University](http://select.cs.cmu.edu/code/graphlab/doxygen/html/index.html).
+
+
+Figure 4: The Graphlab RPC is optimized for high throughput when messages are small._
+
+The primary design goal of the GraphLab RPC was to provide _an easy to use, yet
+high performance asynchronous communication
+mechanism_[](#_msocom_13)[](#_msocom_14)[](#_msocom_15) between _identical_
+programs running on different machines over a distributed network. It has taken
+several years of non-trivial engineering by a group of [smart
+people](http://select.cs.cmu.edu/publications/paperdir/osdi2012-gonzalez-low-gu-bickson-guestrin.pdf)
+to optimize the RPC for throughput when message sizes are very small (something
+                                                                      very
+                                                                      common to
+                                                                      graph-analytics
+                                                                      problems
+                                                                      like
+                                                                      pagerank,
+                                                                      label
+                                                                      propagation,
+                                                                      community
+                                                                      detection
+                                                                      etc.) The
+plot above illustrates the performance of the Graphlab RPC in comparison with
+ZeroMQ. Notice that for message sizes less than 2048 bits, the Graphlab RPC
+provides significantly higher throughput. A thorough explanation of the RPC and
+its engineering design choices is a longer discussion that is out of the scope
+of the blog post.
+
+In addition to being optimized for performance, For instance, consider the
+following code snippet:
+
+~
+//Initialize the distributed context from a configuration file.
+distributed_context dc(“mycluster.config”)
+
+// Define an arbitrary function
+int add_one(int x) {
+      return x + 1;
+      }
+
+      // Execute a function on another machine.
+      machine_id = 0
+      result = dc.remote_call(machine_id, add_one, 1) // call add_one(1)</pre>
+~
+
+In this code snippet, there are three simple steps to executing code on another machine:
+* **Spawning & Initialization**: In this phase, we initialize a distributed
+program from a simple configuration file.
+* **Function Definition:** We define a function to be executed (say part of the
+                                                                model training)
+to be executed on each machine. The function is predefined and compiled into a
+binary that is shared across all the machines.
+* **Remote Function Calls**: Machines can execute function calls defined in the
+initialized program through a low level RPC protocol.
+
+The Graphlab RPC is also very flexible which makes it easy to build distributed
+computation abstractions which serve as the building blocks for distributing
+more sophisticated algorithms.
+
+== All Reduce
+
+  _AllReduce_ is a commonly used abstraction in the Message Passing Interface
+  (MPI) system. For those that are interested, I recommend reading this
+  [tutorial](http://mpitutorial.com/beginner-mpi-tutorial/) on MPI. An
+  _AllReduce_ consists of two stages (1) _reduce_ followed by (2) _broadcast_.
+  The _reduce_ operation involves a “_reduction_” of a set of arguments into a
+  smaller set of arguments dictated by a function. For example, we can reduce
+  the list of numbers [3,7,11,15] with the _sum_ function to obtain
+  sum([3,7,11,15]) = 36\. Once stage (1) of the _AllReduce_ is complete, we
+  broadcast the result of the sum (i.e 36) to all the machines in the
+  distributed system. The two phases of the _AllReduce_ operation performed on
+  a distributed system with 4 machines is illustrated in the figure above.
+
+  
+Figure 5: An illustration of all-reduce performed on a list([3, 7, 11, 15])
+  with sum as the reduce function._
+
+An efficient implementation of _AllReduce_ forms the basis of some of the
+distributed model training algorithms (like logistic regression, SVMs etc.)
+  that we have implemented.
+
+== Distributing linear models
+
+In this section, I will describe how we use _AllReduce_ for distributed linear
+model training using a general purpose convex optimization library. For an
+overview of modern convex optimization algorithms, I refer an interested reader
+to blog [post](http://blog.dato.com/parallel-ml-with-hogwild) on parallel
+machine learning algorithms. For distributing general purpose convex
+optimization, we require distributed computation of:
+
+*   A **loss function** which maps the input data which is originally in a
+feature space into a real number using a function that intuitively represents a
+"cost" associated with the data.
+*   A **gradient** which measures the rate of change of the loss function along
+each feature in the input feature space of the problem.
+
+Note that for some optimization algorithms, a hessian (rate of change of
+                                                       gradient) is also
+computed. The distributed computation of gradients and loss functions can be
+written using an _AllReduce_ as follows:
+
+~
+in parallel, for each machine m:
+         partial_data = load_partition(data, m)
+         partial_loss[m] = loss_function(partial_data)
+         partial_grad[m] = gradient(partial_data)
+
+      loss = all_reduce(partial_loss)
+      grad = all_reduce(partial_grad)</pre>
+~
+
+With the loss and gradient functions distributed, one can easily perform model
+training with an iterative algorithm like [gradient
+descent](https://en.wikipedia.org/wiki/Gradient_descent) or
+[L-BFGS.](https://en.wikipedia.org/wiki/Limited-memory_BFGS)
+
+Let us try and sketch out the cost of this algorithm for a problem with N rows
+of data, M features, and K machines. For each iteration of these algorithms,
+   the computational complexity of each iteration is **O(MN/K)** while the cost
+   of communication is **O(M log K)** bits. For intuition on why the _log K_
+   term arises, think of K machines being arranged as a binary tree with
+   communication occurring (in parallel) only along the edges of the tree. When
+   K=1 (i.e the single machine setting), the communication cost is 0, while the
+   computation cost is **O(MN).**
+
+== What are the benefits?
+
+ With all the details flushed out, we can work out a mathematical cost-benefit
+ analysis of distributing linear model training. For problems with a large
+ number of rows and few features (i.e N >> M), distributed model training
+ should exhibit perfect _horizontal scaling_ up as you increase the number of
+ machines. This is because, this problem is _compute bound_ if the data fits in
+ the combined memory of the cluster and _disk i/o_ _bound_ when the total
+ amount of data exceeds the total amount of memory in the cluster. Irrespective
+ of whether you are _disk i/o bound_ or _compute bound,_ adding more machines
+ will help the cause by reducing model training time. Note that this analysis
+ comes with a caveat that N is large enough to amortize some of the fixed costs
+ of initializing a distributed system. Typically distributing linear model
+ training is a waste of breath for N < 10,000.
+
+ In order to demonstrate how our models scale with number of machines, we
+ benchmarked our models on the largest-ever industry
+ [dataset](http://www.criteo.com/news/press-releases/2015/06/criteo-releases-industrys-largest-ever-dataset/#sthash.UpWaMPqr.dpuf)
+ for machine learning, the
+ [Criteo](http://labs.criteo.com/downloads/download-terabyte-click-logs/)
+ Terabyte click logs. This
+ [dataset](http://labs.criteo.com/downloads/download-terabyte-click-logs/)
+ provides over 4 billion rows with 39 columns. We were able to use the ideas
+ described in the blog post to train a logistic regression model in 225 secs on
+ 16 c3.xlarge EC2 instanc[](#_msocom_16)es fully connected with a 10G network.
+ Model training on a single machine of the same kind requires 3630 seconds
+ which is approximately 16x slower. This property where doubling the number of
+ machines doubles the speed of the algorithm is called linear speedup or ideal
+ speedup.
+
+ In the following plot, we demonstrate nearly linear speedup for distributing logistic regression training using up to 16 machines.
+Fig:
+
+However, when  M >> N, things can be very different. As the number of machines
+increases, the communication costs start to dominate[[20]](#_msocom_20) . In
+this particular setting, it is very important to make sure that you have fast
+networks in your distributed system (preferably atleast 10G network).  As as
+you increase the number of machines, the cost of communication will far
+outweigh the cost of computation. It would be unreasonable to expect linear
+speedups in model training as you add more machines. In this regime, the system
+is usually _network communication bound_. The only workaround is to rethink the
+algorithms for model training; some promising ones include
+[ADMM](http://web.stanford.edu/~boyd/papers/pdf/admm_distr_stats.pdf),
+[VL-BFGS](http://papers.nips.cc/paper/5333-large-scale-l-bfgs-using-mapreduce.pdf),
+and [parameter server](http://parameterserver.org/). While some of these
+alternatives reduce communication costs, they may be _statistically less
+  efficient_ (i.e require more passes over the data to get to the same level of
+              accuracy of the solution) in comparison with more traditional
+  optimization methods like L-BFGS. In short, the benefits of scaling out
+  distributed linear model training to several machines when M ≅ N (or M >> N)
+  are filled with qualifiers and caveats.
+
+=== Summary
+
+If I were to summarize what I learned, it would still be: “_Don’t use a cluster
+unless you know you need it_[](#_msocom_21)[](#_msocom_22)[](#_msocom_23)." But
+once you know you need it, understanding the tradeoff between _computation_ and
+_communication_ becomes critical in quantifying the benefits of a distributed
+system. When computation is the bottleneck, throw more machines at your
+problem. When communication is your bottleneck, re-think the algorithm,
+    reformulate the problem, or get a faster network.
+
+The engineering team at Dato has been thinking deeply about distributed machine
+learning for years, and what we've built carefully considers single machine
+performance and only distributes computation on a cluster when it makes sense.
+There are still many exciting challenges in distributed machine learning. Today
+we effectively distribute implementations of several models including linear
+models, pagerank, and label propagation. In the future we will be adding
+distributed implementations for several more models, where it makes sense, and
+continuing to optimize the execution of the distributed implementations we have
+today.

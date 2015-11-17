@@ -1,0 +1,405 @@
+# jemdoc: menu{MENU}{menu.html}{../../}
+=== Locally Ideal Formulations for Piecewise Linear Functions with Indicator Variables 
+
+[http://cs.wisc.edu./~srikris/ Srikrishna Sridhar],
+[http://www.engr.wisc.edu/ie/faculty/linderoth_jeffrey.html Jeff Linderoth] and 
+[http://www.engr.wisc.edu/ie/faculty/luedtke_james.html James R. Luedtke]
+
+Computer Sciences, Technical Report: TR1788
+- [http://digital.library.wisc.edu/1793/65192 Manuscript] 
+- [http://www.optimization-online.org/DB_HTML/2013/04/3826.html Optimization Online]
+- [ztrick/appendix.pdf Supplementary Material] 
+
+In this paper, we consider mixed integer linear programming (MIP) formulations for piecewise linear functions (PLFs) that are evaluated when an indicator variable is turned on. We describe modifications to standard MIP formulations for PLFs with desirable theoretical properties and superior computational performance in this context.
+
+
+== Advertizing Budget Allocation Instances 
+We consider an advertising budget allocation problem introduced by [http://mansci.journal.informs.org/content/26/3/242.full.pdf Zoltners and Sinha]. 
+In this problem, a company is required to allocate an advertising budget $D$ among a set $\mathcal{K}$ of advertising strategies for a set of $\mathcal{J}$ products. The return on investment functions are approximated using a piecewise linear function with n breakpoints (n-1 pieces). We created 20 random instances for each of the six problem sizes ($\mathcal{J}$, $\mathcal{K}$, n) ∈ {(50, 50, 10), (50, 100, 10), (100,100,10), (50,50,20), (50,100,20), (100,100,20)}. 
+
+
+You can download all 120 instances used in this paper here 
+- [ztrick/sridhar_linroth_leudtke_advertizing_instances.tar.gz All MIP Instances (565Mb MPS format)].
+
+They have been labelled as follows 
+~~
+*model_J_K_t_n_rep*
+
+where
+- *model* refers to the piecewise linear formulation use. *sos* and *nt_sos* are two variants of a specially ordered set based formulation (see paper for details). Instances with the tag *sos* refer to formulation S1 in the paper while *nt_sos* refers to formulation S2 in the paper.
+- *J* is the number of customers.
+- *K* is the number of marketing strategies.
+- *t* is the roi function type. All instances are of s-shaped roi curves and are denoted by type 1. 
+- *n* is the number of pieces used in the approximation of the nonlinear roi function.
+- *rep* is the id of the random instance of that category (there are 20 per category). 
+~~
+
+== Individual Instances
+   
+
+
+Formulations with a tag S2 are locally ideal while S1 are not. Both S1 and S2 refer to the same underlying model and should hence produce the same MIP solution. 
+
+Each of these instances can be also be downloaded individualy:
+
+ 
+.   
+ .. [ztrick/sos_100_100_1_10_0.mps sos_100_100_1_10_0.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_0.mps nt_sos_100_100_1_10_0.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_10.mps sos_100_100_1_10_10.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_10.mps nt_sos_100_100_1_10_10.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_11.mps sos_100_100_1_10_11.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_11.mps nt_sos_100_100_1_10_11.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_12.mps sos_100_100_1_10_12.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_12.mps nt_sos_100_100_1_10_12.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_13.mps sos_100_100_1_10_13.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_13.mps nt_sos_100_100_1_10_13.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_14.mps sos_100_100_1_10_14.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_14.mps nt_sos_100_100_1_10_14.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_15.mps sos_100_100_1_10_15.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_15.mps nt_sos_100_100_1_10_15.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_16.mps sos_100_100_1_10_16.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_16.mps nt_sos_100_100_1_10_16.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_17.mps sos_100_100_1_10_17.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_17.mps nt_sos_100_100_1_10_17.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_18.mps sos_100_100_1_10_18.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_18.mps nt_sos_100_100_1_10_18.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_19.mps sos_100_100_1_10_19.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_19.mps nt_sos_100_100_1_10_19.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_1.mps sos_100_100_1_10_1.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_1.mps nt_sos_100_100_1_10_1.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_2.mps sos_100_100_1_10_2.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_2.mps nt_sos_100_100_1_10_2.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_3.mps sos_100_100_1_10_3.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_3.mps nt_sos_100_100_1_10_3.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_4.mps sos_100_100_1_10_4.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_4.mps nt_sos_100_100_1_10_4.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_5.mps sos_100_100_1_10_5.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_5.mps nt_sos_100_100_1_10_5.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_6.mps sos_100_100_1_10_6.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_6.mps nt_sos_100_100_1_10_6.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_7.mps sos_100_100_1_10_7.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_7.mps nt_sos_100_100_1_10_7.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_8.mps sos_100_100_1_10_8.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_8.mps nt_sos_100_100_1_10_8.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_10_9.mps sos_100_100_1_10_9.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_10_9.mps nt_sos_100_100_1_10_9.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_0.mps sos_100_100_1_20_0.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_0.mps nt_sos_100_100_1_20_0.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_10.mps sos_100_100_1_20_10.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_10.mps nt_sos_100_100_1_20_10.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_11.mps sos_100_100_1_20_11.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_11.mps nt_sos_100_100_1_20_11.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_12.mps sos_100_100_1_20_12.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_12.mps nt_sos_100_100_1_20_12.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_13.mps sos_100_100_1_20_13.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_13.mps nt_sos_100_100_1_20_13.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_14.mps sos_100_100_1_20_14.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_14.mps nt_sos_100_100_1_20_14.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_15.mps sos_100_100_1_20_15.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_15.mps nt_sos_100_100_1_20_15.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_16.mps sos_100_100_1_20_16.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_16.mps nt_sos_100_100_1_20_16.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_17.mps sos_100_100_1_20_17.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_17.mps nt_sos_100_100_1_20_17.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_18.mps sos_100_100_1_20_18.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_18.mps nt_sos_100_100_1_20_18.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_19.mps sos_100_100_1_20_19.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_19.mps nt_sos_100_100_1_20_19.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_1.mps sos_100_100_1_20_1.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_1.mps nt_sos_100_100_1_20_1.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_2.mps sos_100_100_1_20_2.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_2.mps nt_sos_100_100_1_20_2.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_3.mps sos_100_100_1_20_3.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_3.mps nt_sos_100_100_1_20_3.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_4.mps sos_100_100_1_20_4.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_4.mps nt_sos_100_100_1_20_4.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_5.mps sos_100_100_1_20_5.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_5.mps nt_sos_100_100_1_20_5.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_6.mps sos_100_100_1_20_6.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_6.mps nt_sos_100_100_1_20_6.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_7.mps sos_100_100_1_20_7.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_7.mps nt_sos_100_100_1_20_7.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_8.mps sos_100_100_1_20_8.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_8.mps nt_sos_100_100_1_20_8.mps (S1)]
+.   
+ .. [ztrick/sos_100_100_1_20_9.mps sos_100_100_1_20_9.mps (S2) ]
+ .. [ztrick/nt_sos_100_100_1_20_9.mps nt_sos_100_100_1_20_9.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_0.mps sos_50_100_1_10_0.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_0.mps nt_sos_50_100_1_10_0.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_10.mps sos_50_100_1_10_10.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_10.mps nt_sos_50_100_1_10_10.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_11.mps sos_50_100_1_10_11.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_11.mps nt_sos_50_100_1_10_11.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_12.mps sos_50_100_1_10_12.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_12.mps nt_sos_50_100_1_10_12.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_13.mps sos_50_100_1_10_13.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_13.mps nt_sos_50_100_1_10_13.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_14.mps sos_50_100_1_10_14.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_14.mps nt_sos_50_100_1_10_14.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_15.mps sos_50_100_1_10_15.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_15.mps nt_sos_50_100_1_10_15.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_16.mps sos_50_100_1_10_16.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_16.mps nt_sos_50_100_1_10_16.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_17.mps sos_50_100_1_10_17.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_17.mps nt_sos_50_100_1_10_17.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_18.mps sos_50_100_1_10_18.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_18.mps nt_sos_50_100_1_10_18.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_19.mps sos_50_100_1_10_19.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_19.mps nt_sos_50_100_1_10_19.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_1.mps sos_50_100_1_10_1.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_1.mps nt_sos_50_100_1_10_1.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_2.mps sos_50_100_1_10_2.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_2.mps nt_sos_50_100_1_10_2.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_3.mps sos_50_100_1_10_3.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_3.mps nt_sos_50_100_1_10_3.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_4.mps sos_50_100_1_10_4.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_4.mps nt_sos_50_100_1_10_4.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_5.mps sos_50_100_1_10_5.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_5.mps nt_sos_50_100_1_10_5.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_6.mps sos_50_100_1_10_6.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_6.mps nt_sos_50_100_1_10_6.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_7.mps sos_50_100_1_10_7.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_7.mps nt_sos_50_100_1_10_7.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_8.mps sos_50_100_1_10_8.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_8.mps nt_sos_50_100_1_10_8.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_10_9.mps sos_50_100_1_10_9.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_10_9.mps nt_sos_50_100_1_10_9.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_0.mps sos_50_100_1_20_0.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_0.mps nt_sos_50_100_1_20_0.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_10.mps sos_50_100_1_20_10.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_10.mps nt_sos_50_100_1_20_10.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_11.mps sos_50_100_1_20_11.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_11.mps nt_sos_50_100_1_20_11.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_12.mps sos_50_100_1_20_12.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_12.mps nt_sos_50_100_1_20_12.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_13.mps sos_50_100_1_20_13.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_13.mps nt_sos_50_100_1_20_13.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_14.mps sos_50_100_1_20_14.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_14.mps nt_sos_50_100_1_20_14.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_15.mps sos_50_100_1_20_15.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_15.mps nt_sos_50_100_1_20_15.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_16.mps sos_50_100_1_20_16.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_16.mps nt_sos_50_100_1_20_16.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_17.mps sos_50_100_1_20_17.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_17.mps nt_sos_50_100_1_20_17.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_18.mps sos_50_100_1_20_18.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_18.mps nt_sos_50_100_1_20_18.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_19.mps sos_50_100_1_20_19.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_19.mps nt_sos_50_100_1_20_19.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_1.mps sos_50_100_1_20_1.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_1.mps nt_sos_50_100_1_20_1.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_2.mps sos_50_100_1_20_2.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_2.mps nt_sos_50_100_1_20_2.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_3.mps sos_50_100_1_20_3.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_3.mps nt_sos_50_100_1_20_3.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_4.mps sos_50_100_1_20_4.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_4.mps nt_sos_50_100_1_20_4.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_5.mps sos_50_100_1_20_5.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_5.mps nt_sos_50_100_1_20_5.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_6.mps sos_50_100_1_20_6.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_6.mps nt_sos_50_100_1_20_6.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_7.mps sos_50_100_1_20_7.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_7.mps nt_sos_50_100_1_20_7.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_8.mps sos_50_100_1_20_8.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_8.mps nt_sos_50_100_1_20_8.mps (S1)]
+.   
+ .. [ztrick/sos_50_100_1_20_9.mps sos_50_100_1_20_9.mps (S2) ]
+ .. [ztrick/nt_sos_50_100_1_20_9.mps nt_sos_50_100_1_20_9.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_0.mps sos_50_50_1_10_0.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_0.mps nt_sos_50_50_1_10_0.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_10.mps sos_50_50_1_10_10.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_10.mps nt_sos_50_50_1_10_10.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_11.mps sos_50_50_1_10_11.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_11.mps nt_sos_50_50_1_10_11.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_12.mps sos_50_50_1_10_12.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_12.mps nt_sos_50_50_1_10_12.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_13.mps sos_50_50_1_10_13.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_13.mps nt_sos_50_50_1_10_13.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_14.mps sos_50_50_1_10_14.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_14.mps nt_sos_50_50_1_10_14.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_15.mps sos_50_50_1_10_15.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_15.mps nt_sos_50_50_1_10_15.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_16.mps sos_50_50_1_10_16.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_16.mps nt_sos_50_50_1_10_16.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_17.mps sos_50_50_1_10_17.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_17.mps nt_sos_50_50_1_10_17.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_18.mps sos_50_50_1_10_18.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_18.mps nt_sos_50_50_1_10_18.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_19.mps sos_50_50_1_10_19.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_19.mps nt_sos_50_50_1_10_19.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_1.mps sos_50_50_1_10_1.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_1.mps nt_sos_50_50_1_10_1.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_2.mps sos_50_50_1_10_2.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_2.mps nt_sos_50_50_1_10_2.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_3.mps sos_50_50_1_10_3.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_3.mps nt_sos_50_50_1_10_3.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_4.mps sos_50_50_1_10_4.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_4.mps nt_sos_50_50_1_10_4.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_5.mps sos_50_50_1_10_5.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_5.mps nt_sos_50_50_1_10_5.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_6.mps sos_50_50_1_10_6.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_6.mps nt_sos_50_50_1_10_6.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_7.mps sos_50_50_1_10_7.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_7.mps nt_sos_50_50_1_10_7.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_8.mps sos_50_50_1_10_8.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_8.mps nt_sos_50_50_1_10_8.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_10_9.mps sos_50_50_1_10_9.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_10_9.mps nt_sos_50_50_1_10_9.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_0.mps sos_50_50_1_20_0.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_0.mps nt_sos_50_50_1_20_0.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_10.mps sos_50_50_1_20_10.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_10.mps nt_sos_50_50_1_20_10.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_11.mps sos_50_50_1_20_11.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_11.mps nt_sos_50_50_1_20_11.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_12.mps sos_50_50_1_20_12.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_12.mps nt_sos_50_50_1_20_12.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_13.mps sos_50_50_1_20_13.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_13.mps nt_sos_50_50_1_20_13.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_14.mps sos_50_50_1_20_14.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_14.mps nt_sos_50_50_1_20_14.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_15.mps sos_50_50_1_20_15.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_15.mps nt_sos_50_50_1_20_15.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_16.mps sos_50_50_1_20_16.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_16.mps nt_sos_50_50_1_20_16.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_17.mps sos_50_50_1_20_17.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_17.mps nt_sos_50_50_1_20_17.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_18.mps sos_50_50_1_20_18.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_18.mps nt_sos_50_50_1_20_18.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_19.mps sos_50_50_1_20_19.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_19.mps nt_sos_50_50_1_20_19.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_1.mps sos_50_50_1_20_1.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_1.mps nt_sos_50_50_1_20_1.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_2.mps sos_50_50_1_20_2.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_2.mps nt_sos_50_50_1_20_2.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_3.mps sos_50_50_1_20_3.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_3.mps nt_sos_50_50_1_20_3.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_4.mps sos_50_50_1_20_4.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_4.mps nt_sos_50_50_1_20_4.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_5.mps sos_50_50_1_20_5.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_5.mps nt_sos_50_50_1_20_5.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_6.mps sos_50_50_1_20_6.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_6.mps nt_sos_50_50_1_20_6.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_7.mps sos_50_50_1_20_7.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_7.mps nt_sos_50_50_1_20_7.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_8.mps sos_50_50_1_20_8.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_8.mps nt_sos_50_50_1_20_8.mps (S1)]
+.   
+ .. [ztrick/sos_50_50_1_20_9.mps sos_50_50_1_20_9.mps (S2) ]
+ .. [ztrick/nt_sos_50_50_1_20_9.mps nt_sos_50_50_1_20_9.mps (S1)]

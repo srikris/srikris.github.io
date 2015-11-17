@@ -1,0 +1,921 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Locally Ideal Formulations for Piecewise Linear Functions with Indicator Variables </title>
+</head>
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">Srikrishna Sridhar</div>
+<div class="menu-item"><a href="../../index.html">Home</a></div>
+<div class="menu-item"><a href="../../blog.html">Blog</a></div>
+<div class="menu-item"><a href="../../talks.html">Talks</a></div>
+<div class="menu-item"><a href="../../research.html">Research</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Locally Ideal Formulations for Piecewise Linear Functions with Indicator Variables </h1>
+</div>
+<p><a href="http://cs.wisc.edu./~srikris/">Srikrishna Sridhar</a>,
+<a href="http://www.engr.wisc.edu/ie/faculty/linderoth_jeffrey.html">Jeff Linderoth</a> and 
+<a href="http://www.engr.wisc.edu/ie/faculty/luedtke_james.html">James R. Luedtke</a></p>
+<p>Computer Sciences, Technical Report: TR1788</p>
+<ul>
+<li><p><a href="http://digital.library.wisc.edu/1793/65192">Manuscript</a> </p>
+</li>
+<li><p><a href="http://www.optimization-online.org/DB_HTML/2013/04/3826.html">Optimization Online</a></p>
+</li>
+<li><p><a href="ztrick/appendix.pdf">Supplementary Material</a> </p>
+</li>
+</ul>
+<p>In this paper, we consider mixed integer linear programming (MIP) formulations for piecewise linear functions (PLFs) that are evaluated when an indicator variable is turned on. We describe modifications to standard MIP formulations for PLFs with desirable theoretical properties and superior computational performance in this context.</p>
+<h2>Advertizing Budget Allocation Instances </h2>
+<p>We consider an advertising budget allocation problem introduced by <a href="http://mansci.journal.informs.org/content/26/3/242.full.pdf">Zoltners and Sinha</a>. 
+In this problem, a company is required to allocate an advertising budget $D$ among a set $mathcal{K}$ of advertising strategies for a set of $mathcal{J}$ products. The return on investment functions are approximated using a piecewise linear function with n breakpoints (n-1 pieces). We created 20 random instances for each of the six problem sizes ($mathcal{J}$, $mathcal{K}$, n) ∈ {(50, 50, 10), (50, 100, 10), (100,100,10), (50,50,20), (50,100,20), (100,100,20)}. </p>
+<p>You can download all 120 instances used in this paper here </p>
+<ul>
+<li><p><a href="ztrick/sridhar_linroth_leudtke_advertizing_instances.tar.gz">All MIP Instances (565Mb MPS format)</a>.</p>
+</li>
+</ul>
+<p>They have been labelled as follows </p>
+<div class="infoblock">
+<div class="blockcontent">
+<p><b>model_J_K_t_n_rep</b></p>
+<p>where</p>
+<ul>
+<li><p><b>model</b> refers to the piecewise linear formulation use. <b>sos</b> and <b>nt_sos</b> are two variants of a specially ordered set based formulation (see paper for details). Instances with the tag <b>sos</b> refer to formulation S1 in the paper while <b>nt_sos</b> refers to formulation S2 in the paper.</p>
+</li>
+<li><p><b>J</b> is the number of customers.</p>
+</li>
+<li><p><b>K</b> is the number of marketing strategies.</p>
+</li>
+<li><p><b>t</b> is the roi function type. All instances are of s-shaped roi curves and are denoted by type 1. </p>
+</li>
+<li><p><b>n</b> is the number of pieces used in the approximation of the nonlinear roi function.</p>
+</li>
+<li><p><b>rep</b> is the id of the random instance of that category (there are 20 per category). </p>
+</li>
+</ul>
+</div></div>
+<h2>Individual Instances</h2>
+<p>Formulations with a tag S2 are locally ideal while S1 are not. Both S1 and S2 refer to the same underlying model and should hence produce the same MIP solution. </p>
+<p>Each of these instances can be also be downloaded individualy:</p>
+<ol>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_0.mps">sos_100_100_1_10_0.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_0.mps">nt_sos_100_100_1_10_0.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_10.mps">sos_100_100_1_10_10.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_10.mps">nt_sos_100_100_1_10_10.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_11.mps">sos_100_100_1_10_11.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_11.mps">nt_sos_100_100_1_10_11.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_12.mps">sos_100_100_1_10_12.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_12.mps">nt_sos_100_100_1_10_12.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_13.mps">sos_100_100_1_10_13.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_13.mps">nt_sos_100_100_1_10_13.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_14.mps">sos_100_100_1_10_14.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_14.mps">nt_sos_100_100_1_10_14.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_15.mps">sos_100_100_1_10_15.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_15.mps">nt_sos_100_100_1_10_15.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_16.mps">sos_100_100_1_10_16.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_16.mps">nt_sos_100_100_1_10_16.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_17.mps">sos_100_100_1_10_17.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_17.mps">nt_sos_100_100_1_10_17.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_18.mps">sos_100_100_1_10_18.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_18.mps">nt_sos_100_100_1_10_18.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_19.mps">sos_100_100_1_10_19.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_19.mps">nt_sos_100_100_1_10_19.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_1.mps">sos_100_100_1_10_1.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_1.mps">nt_sos_100_100_1_10_1.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_2.mps">sos_100_100_1_10_2.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_2.mps">nt_sos_100_100_1_10_2.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_3.mps">sos_100_100_1_10_3.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_3.mps">nt_sos_100_100_1_10_3.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_4.mps">sos_100_100_1_10_4.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_4.mps">nt_sos_100_100_1_10_4.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_5.mps">sos_100_100_1_10_5.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_5.mps">nt_sos_100_100_1_10_5.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_6.mps">sos_100_100_1_10_6.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_6.mps">nt_sos_100_100_1_10_6.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_7.mps">sos_100_100_1_10_7.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_7.mps">nt_sos_100_100_1_10_7.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_8.mps">sos_100_100_1_10_8.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_8.mps">nt_sos_100_100_1_10_8.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_10_9.mps">sos_100_100_1_10_9.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_10_9.mps">nt_sos_100_100_1_10_9.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_0.mps">sos_100_100_1_20_0.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_0.mps">nt_sos_100_100_1_20_0.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_10.mps">sos_100_100_1_20_10.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_10.mps">nt_sos_100_100_1_20_10.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_11.mps">sos_100_100_1_20_11.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_11.mps">nt_sos_100_100_1_20_11.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_12.mps">sos_100_100_1_20_12.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_12.mps">nt_sos_100_100_1_20_12.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_13.mps">sos_100_100_1_20_13.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_13.mps">nt_sos_100_100_1_20_13.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_14.mps">sos_100_100_1_20_14.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_14.mps">nt_sos_100_100_1_20_14.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_15.mps">sos_100_100_1_20_15.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_15.mps">nt_sos_100_100_1_20_15.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_16.mps">sos_100_100_1_20_16.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_16.mps">nt_sos_100_100_1_20_16.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_17.mps">sos_100_100_1_20_17.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_17.mps">nt_sos_100_100_1_20_17.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_18.mps">sos_100_100_1_20_18.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_18.mps">nt_sos_100_100_1_20_18.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_19.mps">sos_100_100_1_20_19.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_19.mps">nt_sos_100_100_1_20_19.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_1.mps">sos_100_100_1_20_1.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_1.mps">nt_sos_100_100_1_20_1.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_2.mps">sos_100_100_1_20_2.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_2.mps">nt_sos_100_100_1_20_2.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_3.mps">sos_100_100_1_20_3.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_3.mps">nt_sos_100_100_1_20_3.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_4.mps">sos_100_100_1_20_4.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_4.mps">nt_sos_100_100_1_20_4.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_5.mps">sos_100_100_1_20_5.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_5.mps">nt_sos_100_100_1_20_5.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_6.mps">sos_100_100_1_20_6.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_6.mps">nt_sos_100_100_1_20_6.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_7.mps">sos_100_100_1_20_7.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_7.mps">nt_sos_100_100_1_20_7.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_8.mps">sos_100_100_1_20_8.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_8.mps">nt_sos_100_100_1_20_8.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_100_100_1_20_9.mps">sos_100_100_1_20_9.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_100_100_1_20_9.mps">nt_sos_100_100_1_20_9.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_0.mps">sos_50_100_1_10_0.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_0.mps">nt_sos_50_100_1_10_0.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_10.mps">sos_50_100_1_10_10.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_10.mps">nt_sos_50_100_1_10_10.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_11.mps">sos_50_100_1_10_11.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_11.mps">nt_sos_50_100_1_10_11.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_12.mps">sos_50_100_1_10_12.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_12.mps">nt_sos_50_100_1_10_12.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_13.mps">sos_50_100_1_10_13.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_13.mps">nt_sos_50_100_1_10_13.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_14.mps">sos_50_100_1_10_14.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_14.mps">nt_sos_50_100_1_10_14.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_15.mps">sos_50_100_1_10_15.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_15.mps">nt_sos_50_100_1_10_15.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_16.mps">sos_50_100_1_10_16.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_16.mps">nt_sos_50_100_1_10_16.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_17.mps">sos_50_100_1_10_17.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_17.mps">nt_sos_50_100_1_10_17.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_18.mps">sos_50_100_1_10_18.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_18.mps">nt_sos_50_100_1_10_18.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_19.mps">sos_50_100_1_10_19.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_19.mps">nt_sos_50_100_1_10_19.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_1.mps">sos_50_100_1_10_1.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_1.mps">nt_sos_50_100_1_10_1.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_2.mps">sos_50_100_1_10_2.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_2.mps">nt_sos_50_100_1_10_2.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_3.mps">sos_50_100_1_10_3.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_3.mps">nt_sos_50_100_1_10_3.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_4.mps">sos_50_100_1_10_4.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_4.mps">nt_sos_50_100_1_10_4.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_5.mps">sos_50_100_1_10_5.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_5.mps">nt_sos_50_100_1_10_5.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_6.mps">sos_50_100_1_10_6.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_6.mps">nt_sos_50_100_1_10_6.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_7.mps">sos_50_100_1_10_7.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_7.mps">nt_sos_50_100_1_10_7.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_8.mps">sos_50_100_1_10_8.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_8.mps">nt_sos_50_100_1_10_8.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_10_9.mps">sos_50_100_1_10_9.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_10_9.mps">nt_sos_50_100_1_10_9.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_0.mps">sos_50_100_1_20_0.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_0.mps">nt_sos_50_100_1_20_0.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_10.mps">sos_50_100_1_20_10.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_10.mps">nt_sos_50_100_1_20_10.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_11.mps">sos_50_100_1_20_11.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_11.mps">nt_sos_50_100_1_20_11.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_12.mps">sos_50_100_1_20_12.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_12.mps">nt_sos_50_100_1_20_12.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_13.mps">sos_50_100_1_20_13.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_13.mps">nt_sos_50_100_1_20_13.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_14.mps">sos_50_100_1_20_14.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_14.mps">nt_sos_50_100_1_20_14.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_15.mps">sos_50_100_1_20_15.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_15.mps">nt_sos_50_100_1_20_15.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_16.mps">sos_50_100_1_20_16.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_16.mps">nt_sos_50_100_1_20_16.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_17.mps">sos_50_100_1_20_17.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_17.mps">nt_sos_50_100_1_20_17.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_18.mps">sos_50_100_1_20_18.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_18.mps">nt_sos_50_100_1_20_18.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_19.mps">sos_50_100_1_20_19.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_19.mps">nt_sos_50_100_1_20_19.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_1.mps">sos_50_100_1_20_1.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_1.mps">nt_sos_50_100_1_20_1.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_2.mps">sos_50_100_1_20_2.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_2.mps">nt_sos_50_100_1_20_2.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_3.mps">sos_50_100_1_20_3.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_3.mps">nt_sos_50_100_1_20_3.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_4.mps">sos_50_100_1_20_4.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_4.mps">nt_sos_50_100_1_20_4.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_5.mps">sos_50_100_1_20_5.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_5.mps">nt_sos_50_100_1_20_5.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_6.mps">sos_50_100_1_20_6.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_6.mps">nt_sos_50_100_1_20_6.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_7.mps">sos_50_100_1_20_7.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_7.mps">nt_sos_50_100_1_20_7.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_8.mps">sos_50_100_1_20_8.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_8.mps">nt_sos_50_100_1_20_8.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_100_1_20_9.mps">sos_50_100_1_20_9.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_100_1_20_9.mps">nt_sos_50_100_1_20_9.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_0.mps">sos_50_50_1_10_0.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_0.mps">nt_sos_50_50_1_10_0.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_10.mps">sos_50_50_1_10_10.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_10.mps">nt_sos_50_50_1_10_10.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_11.mps">sos_50_50_1_10_11.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_11.mps">nt_sos_50_50_1_10_11.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_12.mps">sos_50_50_1_10_12.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_12.mps">nt_sos_50_50_1_10_12.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_13.mps">sos_50_50_1_10_13.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_13.mps">nt_sos_50_50_1_10_13.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_14.mps">sos_50_50_1_10_14.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_14.mps">nt_sos_50_50_1_10_14.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_15.mps">sos_50_50_1_10_15.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_15.mps">nt_sos_50_50_1_10_15.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_16.mps">sos_50_50_1_10_16.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_16.mps">nt_sos_50_50_1_10_16.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_17.mps">sos_50_50_1_10_17.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_17.mps">nt_sos_50_50_1_10_17.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_18.mps">sos_50_50_1_10_18.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_18.mps">nt_sos_50_50_1_10_18.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_19.mps">sos_50_50_1_10_19.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_19.mps">nt_sos_50_50_1_10_19.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_1.mps">sos_50_50_1_10_1.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_1.mps">nt_sos_50_50_1_10_1.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_2.mps">sos_50_50_1_10_2.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_2.mps">nt_sos_50_50_1_10_2.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_3.mps">sos_50_50_1_10_3.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_3.mps">nt_sos_50_50_1_10_3.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_4.mps">sos_50_50_1_10_4.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_4.mps">nt_sos_50_50_1_10_4.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_5.mps">sos_50_50_1_10_5.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_5.mps">nt_sos_50_50_1_10_5.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_6.mps">sos_50_50_1_10_6.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_6.mps">nt_sos_50_50_1_10_6.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_7.mps">sos_50_50_1_10_7.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_7.mps">nt_sos_50_50_1_10_7.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_8.mps">sos_50_50_1_10_8.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_8.mps">nt_sos_50_50_1_10_8.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_10_9.mps">sos_50_50_1_10_9.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_10_9.mps">nt_sos_50_50_1_10_9.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_0.mps">sos_50_50_1_20_0.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_0.mps">nt_sos_50_50_1_20_0.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_10.mps">sos_50_50_1_20_10.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_10.mps">nt_sos_50_50_1_20_10.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_11.mps">sos_50_50_1_20_11.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_11.mps">nt_sos_50_50_1_20_11.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_12.mps">sos_50_50_1_20_12.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_12.mps">nt_sos_50_50_1_20_12.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_13.mps">sos_50_50_1_20_13.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_13.mps">nt_sos_50_50_1_20_13.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_14.mps">sos_50_50_1_20_14.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_14.mps">nt_sos_50_50_1_20_14.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_15.mps">sos_50_50_1_20_15.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_15.mps">nt_sos_50_50_1_20_15.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_16.mps">sos_50_50_1_20_16.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_16.mps">nt_sos_50_50_1_20_16.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_17.mps">sos_50_50_1_20_17.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_17.mps">nt_sos_50_50_1_20_17.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_18.mps">sos_50_50_1_20_18.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_18.mps">nt_sos_50_50_1_20_18.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_19.mps">sos_50_50_1_20_19.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_19.mps">nt_sos_50_50_1_20_19.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_1.mps">sos_50_50_1_20_1.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_1.mps">nt_sos_50_50_1_20_1.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_2.mps">sos_50_50_1_20_2.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_2.mps">nt_sos_50_50_1_20_2.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_3.mps">sos_50_50_1_20_3.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_3.mps">nt_sos_50_50_1_20_3.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_4.mps">sos_50_50_1_20_4.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_4.mps">nt_sos_50_50_1_20_4.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_5.mps">sos_50_50_1_20_5.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_5.mps">nt_sos_50_50_1_20_5.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_6.mps">sos_50_50_1_20_6.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_6.mps">nt_sos_50_50_1_20_6.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_7.mps">sos_50_50_1_20_7.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_7.mps">nt_sos_50_50_1_20_7.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_8.mps">sos_50_50_1_20_8.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_8.mps">nt_sos_50_50_1_20_8.mps (S1)</a></p>
+</li></ol>
+</li>
+<li><p></p>
+<ol>
+<li><p><a href="ztrick/sos_50_50_1_20_9.mps">sos_50_50_1_20_9.mps (S2)</a></p>
+</li>
+<li><p><a href="ztrick/nt_sos_50_50_1_20_9.mps">nt_sos_50_50_1_20_9.mps (S1)</a></p>
+</li>
+</ol>
+
+</li>
+</ol>
+<div id="footer">
+<div id="footer-text">
+Page generated 2015-11-17 01:50:58 PST, by <a href="http://jemdoc.jaboc.net/">jemdoc</a>.
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

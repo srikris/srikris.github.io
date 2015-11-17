@@ -1,0 +1,33 @@
+# jemdoc: menu{MENU}{menu.html}{./}
+== Research Publicaitons 
+
+Research publications are listed below in reverse chronological order 
+(earliest to latest). 
+
+==  PhD Thesis
+:{[papers/thesis.html Mixed-Integer Programming Approaches for some Non-convex
+and Combinatorial Optimization Problems], /Jan 2014/}
+Advisors: Stephen J. Wright, Jeff Linderoth, and James R. Luedtke 
+
+== Recent Papers
+
+:{[http://arxiv-web3.library.cornell.edu/abs/1401.4780  An Asynchronous
+Parallel Randomized Kaczmarz Algorithm], /Arxiv 2014/}
+Ji Liu, Stephen J. Wright, *Srikrishna Sridhar*
+
+:{[papers/lp.html An Approximate, Efficient Solver for LP Rounding], /NIPS 2013/}
+*Srikrishna Sridhar*, Victor Bittorf, Ji Liu, Ce Zhang, Christopher Ré, Stephen J. Wright
+
+:{[papers/increasebp.html Models, and Solution Techniques for Production
+Planning Problems with Increasing Byproducts], /Journal of Global Optimization 2014 (Under review)/} 
+*Srikrishna Sridhar*, Jeff Linderoth, and James R. Luedtke
+
+
+:{[papers/ztrick.html Locally Ideal Formulations for Piecewise Linear Functions with Indicator Variables], /Operations Research Letters 2013/} 
+*Srikrishna Sridhar*, Jeff Linderoth, and James R. Luedtke
+
+:{[papers/nhii.html Optimizing financial effects of HIE: A multi-party linear programming approach], /JAMIA 2012/}
+*Srikrishna Sridhar*, Patricia Flatley Brennan, Stephen J. Wright, and Stephen R. Robinson
+
+:{[papers/pdf/comsnets09-final93.pdf Channel Assignment in Multi-Radio WMNs : A Graph-Theoretic Approach,] /IEEE-COMSNETS 2009/}
+*Srikrishna Sridhar*, Jun Guo, and Sanjay Jha

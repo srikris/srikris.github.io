@@ -1,0 +1,34 @@
+# jemdoc: menu{MENU}{menu.html}{../../}
+=== Optimizing financial effects of HIE: A multiparty linear programming approach 
+
+[http://cs.wisc.edu./~srikris/ Srikrishna Sridhar],
+[http://www.engr.wisc.edu/ie/faculty/brennan_patricia.html Patricia Brennan],
+[http://cs.wisc.edu./~swright/ Stephen J. Wright] and 
+[http://www.engr.wisc.edu/ie/faculty/robinson_stephen.html Stephen M. Robinson],
+
+
+Journal of American Medical Informatics Association 2012 Nov-Dec;19(6):1082-8
+- [nhii/nhii.pdf Manuscript]
+- [nhii/AppendixA.pdf Appendix A]
+- [nhii/AppendixB.pdf Appendix B]
+- [nhii/AppendixC.pdf Appendix C]
+- [nhii/GAMSCode.zip Code]
+- [../presentations/WARF12-Abstract.pdf Abstract]
+- [../presentations/WARF12.pdf Poster]
+
+== Press Coverage
+- Medical Economics provided a neat [http://medicaleconomics.modernmedicine.com/medical-economics/news/financial-model-shows-costs-savings-hie overview] of our paper!
+- Wispolitics, a political newspaper, [http://www.wispolitics.com/index.iml?Article=278347 reviewed] our paper.
+
+=== Abstract 
+Objective To describe an analytical framework for quantifying the societal savings and financial consequences of a health information exchange (HIE), and to demonstrate its use in designing pricing policies for sustainable HIEs.
+
+=== Materials and Methods
+We developed a linear programming model to (1) quantify the financial worth of HIE information to each of its participating institutions and (2) evaluate three HIE pricing policies: fixed-rate annual, charge per visit, and charge per look-up. We considered three desired outcomes of HIE-related emergency care (modeled as parameters): preventing unrequired hospitalizations, reducing duplicate tests, and avoiding emergency department (ED) visits. We applied this framework to 4639 ED encounters over a 12-month period in three large EDs in Milwaukee, Wisconsin, using Medicare/Medicaid claims data, public reports of hospital admissions, published payer mix data, and use data from a not-for-profit regional HIE.
+
+=== Results
+For this HIE, data accesses produced net financial gains for all providers and payers. Gains, due to HIE, were more significant for providers with more health maintenance organizations patients. Reducing unrequired hospitalizations and avoiding repeat ED visits were responsible for more than 70% of the savings. The results showed that fixed annual subscriptions can sustain this HIE, while ensuring financial gains to all participants. Sensitivity analysis revealed that the results were robust to uncertainties in modeling parameters. 
+
+=== Discussion 
+Our specific HIE pricing recommendations depend on the unique characteristics of this study population. However, our main contribution is the modeling approach, which is broadly applicable to other populations.
+

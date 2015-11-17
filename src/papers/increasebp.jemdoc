@@ -1,0 +1,43 @@
+# jemdoc: menu{MENU}{menu.html}{../../}
+=== Models and Solution Techniques for Production Planning Problems with Increasing Byproducts
+
+[http://cs.wisc.edu./~srikris/ Srikrishna Sridhar],
+[http://www.engr.wisc.edu/ie/faculty/linderoth_jeffrey.html Jeff Linderoth] and 
+[http://www.engr.wisc.edu/ie/faculty/luedtke_james.html James R. Luedtke]
+
+Computer Sciences, Technical Report
+- [increasebp/Informs12.pdf Informs 2012 Presentation] 
+- [increasebp/MIP12-Poster.pdf MIP 2012 Poster] 
+
+== Preprints
+- [http://www.optimization-online.org/DB_HTML/2014/01/4197.html Optimization Online]
+- [ztrick/appendix.pdf Supplementary Material] 
+
+== Abstract
+We consider a production planning problem where the production process creates
+a mixture of desirable products and undesirable byproducts. In this production
+process, at any point in time the fraction of the mixture that is an
+undesirable byproduct increases monotonically as a function of the cumulative
+mixture production up to that time. The mathematical formulation of this
+continuous-time problem is nonconvex.
+
+
+We present a discrete-time formulation that exploits the increasing nature of
+the byproduct ratio function. We demonstrate that this new formulation is more
+accurate than a previously proposed formulation. We describe three different
+mixed-integer linear programming approximation and relaxation models of this
+formulation, and we show how to strengthen these models using integrality and
+monotonicity properties of the formulation. We also introduce nonlinear
+programming formulations to choose piecewise-linear approximations and
+relaxations of multiple functions that share the same domain and use the same
+set of break points in the domain.
+
+
+We conclude with computational experiments to demonstrate the improved accuracy
+of the proposed formulation, compare the solution times of various models, and
+illustrate the quality of the piecewise-linear approximations produced by our
+nonlinear program- ming formulations.
+
+
+== Instances
+Coming soon! 

@@ -1,0 +1,31 @@
+# jemdoc: menu{MENU}{menu.html}{./}
+== Talks, and Posters 
+
+:{[presentations/Defense.pdf Mixed-Integer Programming Approaches for some
+Non-convex, and Combinatorial Optimization Problems.]}
+Thesis Defense, 23rd January 2014, Madison, Wisconsin 
+
+:{[presentations/NIPS-13.pdf An Approximate, Efficient Solver for LP Rounding.]}
+NIPS, 8th December 2013, Lake Tahoe, Nevada 
+
+:{[presentations/Pivotal-Aug13.pdf Solving combinatorial problems at scale.]}
+Pivotal Inc., 15th August 2013, San-Mateo, California 
+
+:{[presentations/EMC-Jun13.pdf THETIS: An approximate solver for large scale combinatorial problems.]}
+EMC University Day, 17th June 2013, Santa-Clara, California 
+
+:{[presentations/Silo-Mar13.pdf DWQP: A solver for large scale box-constrained quadratic programs.]}
+Signals Information Optimization Learning, 13th Mar 2013, Madison, Wisconsin
+
+:{[presentations/MIP12-Poster.pdf Relaxations for Production Planning Problems with increasing byproducts [presentations/MIP12-Abstract.pdf \[*abstract*\]]]} 
+Mixed Integer Programming 2012, 15th July 2012, Davis, California
+
+:{[presentations/WARF12.pdf Optimizing financial effects of HIE: A multi-party linear programming approach] [presentations/WARF12-Abstract.pdf \[*abstract*\]]}
+2012 WARF Discovery Challenge, 23rd May 2012, Madison, Wisconsin 
+
+:{[presentations/Informs12.pdf Relaxations for Production Planning Problems with increasing byproducts]} 
+2012 Informs Optimization Society Conference, 24th Feb 2012, Miami, Florida 
+
+:{[presentations/Silo12.pdf Discrete choice non-linear models for chemical engineering applications]}
+Signals Information Optimization Learning, 1st Feb 2012, Madison, Wisconsin
+

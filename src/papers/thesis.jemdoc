@@ -1,0 +1,24 @@
+# jemdoc: menu{MENU}{menu.html}{../../}
+=== PhD Thesis
+
+== Title 
+Mixed-Integer Programming Approaches for some Non-convex and Combinatorial
+Optimization Problems.
+
+== Advisors 
+- [http://cs.wisc.edu./~swright/ Stephen J. Wright]
+- [http://www.engr.wisc.edu/ie/faculty/linderoth_jeffrey.html Jeff Linderoth] 
+- [http://www.engr.wisc.edu/ie/faculty/luedtke_james.html James R. Luedtke]
+
+== Preprints \& Presentations 
+- [thesis/dissertation.pdf Thesis manuscript] 
+
+== Abstract
+
+In this dissertation we study several nonconvex and combinatorial optimization
+problems with applications in production planning, machine learning,
+advertising, statistics, and computer vision. The common theme is the use of
+algorithmic and modelling techniques from mixed-integer program- ming (MIP)
+which include formulation strengthening, decomposition, and linear programming
+(LP) rounding.
+

@@ -1,0 +1,33 @@
+# jemdoc: menu{MENU}{menu.html}{./}
+== *Srikrishna Sridhar*  - Staff Data Scientist, Dato Inc. 
+
+~~
+{}{img_left}{src/krishna.jpg}{alt text}{120px}{168px}{src/krishna.jpg}
+
+I'm a Data Scientist at Dato Inc. working on scalable, efficient, and easy to
+use software for data science. I am passionate about software; data; and
+numerical mathematics. I love creating simple tools to lower the barrier of
+entry for machine learning applications.
+
+Previously, I was a graduate student at the University of Wisconsin working on
+problems in large scale mathematical optimization, and data analysis. I was
+very fortunate to be advised by three leading experts in the field of numerical
+optimization; [http://www.cs.wisc.edu/~swright/ Stephen J. Wright],
+[http://www.engr.wisc.edu/ie/faculty/linderoth_jeffrey.html Jeff Linderoth] and
+[http://www.engr.wisc.edu/ie/faculty/luedtke_james.html James R. Luedtke]. My
+[papers/thesis.html thesis work] involved modeling and solving discrete choice
+non-linear models for applications like health care, production planning, and
+machine learning. 
+~~
+
+== Contact 
+- [https://twitter.com/krishna_srd Twitter (@krishna_srd)]\n
+- [https://www.linkedin.com/in/srikris Linkedin]\n
+- [https://github.com/srikris Github]\n
+
+== Coordinates
+
+936 34th Avenue, North\n
+Seattle, Washington\n
+[srikris@dato.com]
+
